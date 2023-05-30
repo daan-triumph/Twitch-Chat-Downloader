@@ -195,6 +195,10 @@ class SubtitleWriter:
             if ext == 'irc':
                 self.drivers.add(SubtitlesIRC(filename))
 
+            if ext == 'csv':
+                self.drivers.add(SubtitlesCSV(filename))
+
+
     def add(self, comment):
         [driver.add(comment) for driver in self.drivers]
 
