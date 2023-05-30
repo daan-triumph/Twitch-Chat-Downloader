@@ -10,7 +10,7 @@ from .settings import settings
 
 client = Session()
 client.headers['Acccept'] = '*/*'
-client.headers['Client-ID'] = settings['client_id']
+client.headers['client-id'] = settings['client_id']
 
 # Configure retries for all requests
 retries = Retry(connect=5, read=2, redirect=5)
@@ -54,7 +54,7 @@ class Message(object):
                    len(chunk) > 1 and count >= collocations_threshold:
                     groups.append((chunk, pos, count))
                     words[pos:pos+size*count] = [None] * size * count
-        
+
         return groups
 
     @staticmethod
@@ -221,7 +221,6 @@ class Messages(object):
                     msg = Message(comment['node'])
                 except Exception:
                     continue
-            
                 msg_hash = msg.hash()
 
                 if msg_hash in hashes:

@@ -145,6 +145,21 @@ class SubtitlesIRC(Subtitle):
             message=comment.message
         ))
 
+class SubtitlesCSV(Subtitle):
+    def __init__(self, filename: str):
+        super(SubtitlesCSV, self).__init__(filename)
+
+    @staticmethod
+    def ftime(seconds):
+        return Subtitle.ftime(seconds)[:-3].replace('.', settings['millisecond_separator'])
+
+    def add(self, comment):
+        self.file.write('{start},{badge},{user},{message}\n'.format(
+            start=self.ftime(comment.offset),
+            badge=comment.badge,
+            user=comment.user,
+            message=comment.message
+        ))
 
 class SubtitleWriter:
     @staticmethod
